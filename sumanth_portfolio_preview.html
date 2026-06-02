@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sumanth Paranjape — Senior Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=DM+Mono:wght@400;500&amp;family=Sora:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0d0f;
+    --bg2: #111518;
+    --bg3: #181d22;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #e8eaed;
+    --muted: #8a9099;
+    --accent: #3b82f6;
+    --accent2: #6366f1;
+    --accent3: #0ea5e9;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Sora', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,13,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 13px; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -10%; left: 20%; width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,119,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); max-width: 560px;
+    margin-bottom: 3rem; line-height: 1.8;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem; border-radius: 3px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em;
+    text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #60a5fa; }
+  .btn-outline { background: transparent; border: 1px solid var(--border2); color: var(--text); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 5rem; padding-top: 3rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--serif); font-size: 2.5rem; font-style: italic;
+    color: var(--text); line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 0.25rem; letter-spacing: 0.05em; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  h2 {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400; line-height: 1.2; margin-bottom: 3rem;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-cell {
+    background: var(--bg2); padding: 1.75rem;
+    transition: background 0.2s;
+  }
+  .skill-cell:hover { background: var(--bg3); }
+  .skill-category { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: var(--mono); font-size: 11px; padding: 0.2rem 0.6rem;
+    border: 0.5px solid var(--border2); border-radius: 2px;
+    color: var(--muted); letter-spacing: 0.03em;
+    transition: all 0.15s;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ─── EXPERIENCE ─── */
+  .exp-timeline { position: relative; }
+  .exp-item {
+    display: grid; grid-template-columns: 180px 1fr;
+    gap: 2rem; margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem; border-bottom: 0.5px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta { padding-top: 0.1rem; }
+  .exp-date { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em; line-height: 1.8; }
+  .exp-company { font-size: 13px; color: var(--accent); margin-top: 0.5rem; font-weight: 500; }
+  .exp-location { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 0.2rem; }
+  .exp-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 1rem; }
+  .exp-projects { display: flex; flex-direction: column; gap: 1rem; }
+  .exp-project {
+    background: var(--bg2); border: 0.5px solid var(--border);
+    border-radius: 4px; padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .exp-project:hover { border-color: var(--border2); }
+  .proj-name { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+  .proj-name::before { content: '→'; color: var(--accent); font-family: var(--mono); font-size: 12px; }
+  .proj-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 0.75rem; }
+  .proj-impact { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+  .proj-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; }
+  .tech-badge {
+    font-family: var(--mono); font-size: 10px; padding: 0.15rem 0.5rem;
+    background: rgba(59,130,246,0.08); border: 0.5px solid rgba(59,130,246,0.2);
+    border-radius: 2px; color: var(--accent);
+  }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--bg2); border: 0.5px solid var(--border);
+    border-radius: 6px; padding: 2rem; position: relative;
+    transition: all 0.25s; cursor: pointer; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .project-card:hover::before { opacity: 1; }
+  .proj-card-domain {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 1rem;
+    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+  .domain-se { background: rgba(0,119,255,0.1); color: #5599ff; border: 0.5px solid rgba(0,119,255,0.2); }
+  .domain-de { background: rgba(59,130,246,0.1); color: var(--accent); border: 0.5px solid rgba(59,130,246,0.2); }
+  .domain-ds { background: rgba(255,107,53,0.1); color: #ff8a5c; border: 0.5px solid rgba(255,107,53,0.2); }
+  .domain-do { background: rgba(180,100,255,0.1); color: #c070ff; border: 0.5px solid rgba(180,100,255,0.2); }
+  .domain-ai { background: rgba(255,200,0,0.1); color: #ffc800; border: 0.5px solid rgba(255,200,0,0.2); }
+  .proj-card-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 0.75rem; line-height: 1.3; }
+  .proj-card-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+  .proj-card-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; }
+  .proj-card-impact {
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    padding: 0.6rem 0.75rem; background: rgba(59,130,246,0.06);
+    border-radius: 3px; border-left: 2px solid var(--accent);
+  }
+  .add-project-card {
+    border: 1px dashed var(--border2); background: transparent;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.75rem; min-height: 280px; color: var(--muted);
+    transition: all 0.2s; border-radius: 6px;
+  }
+  .add-project-card:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.03); }
+  .add-icon { font-size: 2rem; line-height: 1; }
+  .add-label { font-family: var(--mono); font-size: 13px; letter-spacing: 0.05em; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--bg2); border: 0.5px solid var(--border2);
+    border-radius: 8px; padding: 2.5rem; width: 100%; max-width: 640px;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  label { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+  input, textarea, select {
+    width: 100%; background: var(--bg3); border: 0.5px solid var(--border2);
+    border-radius: 4px; padding: 0.7rem 0.9rem; color: var(--text);
+    font-family: var(--sans); font-size: 14px; outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 80px; }
+  select option { background: var(--bg3); }
+  .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end; }
+  .btn-sm { padding: 0.55rem 1.25rem; font-size: 12px; }
+
+  /* ─── AWARDS ─── */
+  .awards-list { display: flex; flex-direction: column; gap: 1rem; }
+  .award-item {
+    display: flex; align-items: flex-start; gap: 1.5rem;
+    padding: 1.25rem 1.5rem; background: var(--bg2);
+    border: 0.5px solid var(--border); border-radius: 4px;
+  }
+  .award-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .award-title { font-weight: 500; margin-bottom: 0.2rem; }
+  .award-sub { font-size: 13px; color: var(--muted); }
+
+  /* ─── CONTACT ─── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem; background: var(--bg2);
+    border: 0.5px solid var(--border); border-radius: 4px;
+    text-decoration: none; color: var(--text);
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); }
+  .contact-link-icon { font-family: var(--mono); font-size: 13px; color: var(--accent); width: 24px; }
+  .contact-link-val { font-size: 14px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 3rem; border-top: 0.5px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+  /* ─── EDIT CONTROLS ─── */
+  .edit-fab {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 150;
+    display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end;
+  }
+  .fab-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 3px; padding: 0.7rem 1.25rem;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em;
+    cursor: pointer; transition: all 0.2s; font-weight: 500;
+  }
+  .fab-btn:hover { background: #60a5fa; }
+  .fab-btn.secondary { background: var(--bg3); color: var(--text); border: 0.5px solid var(--border2); }
+  .fab-btn.secondary:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.05); }
+
+  [contenteditable="true"] { outline: 1px dashed rgba(0,212,170,0.4); border-radius: 2px; }
+  [contenteditable="true"]:focus { outline: 1px solid var(--accent); background: rgba(59,130,246,0.04); }
+  .edit-mode-banner {
+    display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 99;
+    background: var(--accent); color: #fff;
+    text-align: center; padding: 0.5rem;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em;
+  }
+  .edit-mode-banner.active { display: block; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SP.portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="edit-mode-banner" id="editBanner">✎ Edit mode active — click any text to edit. Click "Exit Edit" when done.</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-tag">Senior Software Engineer</div>
+  <h1>Sumanth<br><em>Paranjape</em></h1>
+  <p class="hero-sub" id="heroSub">
+    Building scalable ad-tech systems, real-time data pipelines, and AI-powered optimizers that drive millions in revenue. 6+ years crafting production systems at the intersection of software engineering, data science, and ML.
+  </p>
+  <div class="hero-cta">
+    <a href="mailto:sumanthparanja@gmail.com" class="btn btn-primary">Get in touch →</a>
+    <a href="#projects" class="btn btn-outline">View projects</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Years of experience</div>
+    </div>
+    <div>
+      <div class="stat-num">$3.3M+</div>
+      <div class="stat-label">Annual revenue impact</div>
+    </div>
+    <div>
+      <div class="stat-num">5</div>
+      <div class="stat-label">Domains of expertise</div>
+    </div>
+    <div>
+      <div class="stat-num">50%</div>
+      <div class="stat-label">Avg. latency reduction</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical stack</div>
+  <h2>Skills &amp; Technologies</h2>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="skill-category">Languages</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">Java</span><span class="tag">Go</span>
+        <span class="tag">C++</span><span class="tag">SQL</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-category">Databases</div>
+      <div class="skill-tags">
+        <span class="tag">PostgreSQL</span><span class="tag">Redshift</span><span class="tag">kSQLDB</span>
+        <span class="tag">Neo4J</span><span class="tag">RocksDB</span><span class="tag">Redis</span><span class="tag">S3</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-category">AI / ML</div>
+      <div class="skill-tags">
+        <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Scikit-learn</span>
+        <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Scipy</span>
+        <span class="tag">Claude Code</span><span class="tag">OpenAI</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-category">Cloud &amp; DevOps</div>
+      <div class="skill-tags">
+        <span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        <span class="tag">EKS</span><span class="tag">EC2</span><span class="tag">EMR</span>
+        <span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">Jenkins</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-category">Data Engineering</div>
+      <div class="skill-tags">
+        <span class="tag">Kafka</span><span class="tag">Spark ETL</span><span class="tag">Kafka Streams</span>
+        <span class="tag">Apache Airflow</span><span class="tag">Data Lake</span><span class="tag">AVRO</span>
+        <span class="tag">Parquet</span>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-category">Observability</div>
+      <div class="skill-tags">
+        <span class="tag">Kibana</span><span class="tag">Grafana</span><span class="tag">New Relic</span>
+        <span class="tag">ElasticSearch</span><span class="tag">JMX</span><span class="tag">JMeter</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career history</div>
+  <h2>Experience</h2>
+  <div class="exp-timeline">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Nov 2024 – Present<br>Jul 2020 – Nov 2024</div>
+        <div class="exp-company">iHeartMedia (Unified)</div>
+        <div class="exp-location">Chandler, AZ · Remote</div>
+      </div>
+      <div>
+        <div class="exp-title">Software Engineer 2 / Engineer 1</div>
+        <div class="exp-projects">
+          <div class="exp-project">
+            <div class="proj-name">Platform Optimizer / Auto-Stop</div>
+            <div class="proj-desc">Designed an ad campaign impressions optimizer and auto-stop service that estimates daily budgets and prevents overspend for publishers across Meta, Amazon, and Google Ads.</div>
+            <div class="proj-impact">↑ $1M+ annually per publisher · 100% overspend prevention</div>
+            <div class="proj-tech">
+              <span class="tech-badge">Python</span><span class="tech-badge">NumPy</span><span class="tech-badge">Scipy</span>
+              <span class="tech-badge">kNN</span><span class="tech-badge">Django</span><span class="tech-badge">RabbitMQ</span>
+              <span class="tech-badge">Kafka</span><span class="tech-badge">Neo4j</span><span class="tech-badge">ReactJS</span>
+            </div>
+          </div>
+          <div class="exp-project">
+            <div class="proj-name">Platform Optimizer Scheduler</div>
+            <div class="proj-desc">Microservice scheduler to overcome Ads API rate limits using internal data collection, improving reliability by 100%.</div>
+            <div class="proj-impact">↑ 100% reliability improvement · 0 rate-limit failures</div>
+            <div class="proj-tech">
+              <span class="tech-badge">Java</span><span class="tech-badge">Kafka Streams</span><span class="tech-badge">AVRO</span>
+              <span class="tech-badge">Redshift</span><span class="tech-badge">Redis</span><span class="tech-badge">Claude Code</span>
+            </div>
+          </div>
+          <div class="exp-project">
+            <div class="proj-name">Bid Optimizer (CTV Campaigns)</div>
+            <div class="proj-desc">Real-time bidding optimizer for Beeswax's CTV campaigns using Multi-Armed Bandit algorithm to prevent budget overspend and maximize revenue.</div>
+            <div class="proj-impact">↑ $2.3M annually · 5% overspend reduction every quarter</div>
+            <div class="proj-tech">
+              <span class="tech-badge">Go</span><span class="tech-badge">Python</span><span class="tech-badge">AWS Glue</span>
+              <span class="tech-badge">Spark ETL</span><span class="tech-badge">MAB Algorithm</span><span class="tech-badge">OpenRTB</span>
+            </div>
+          </div>
+          <div class="exp-project">
+            <div class="proj-name">Real-Time Report Generator</div>
+            <div class="proj-desc">Ad campaign reporting tool reducing setup and validation time by 50% using Kafka Streams and kSQLDB for real-time processing.</div>
+            <div class="proj-impact">↓ 50% campaign setup time · faster debugging cycle</div>
+            <div class="proj-tech">
+              <span class="tech-badge">Java</span><span class="tech-badge">Kafka Streams</span><span class="tech-badge">kSQLDB</span>
+              <span class="tech-badge">Docker</span><span class="tech-badge">EKS</span><span class="tech-badge">New Relic</span>
+            </div>
+          </div>
+          <div class="exp-project">
+            <div class="proj-name">kSQLDB Performance Tuning</div>
+            <div class="proj-desc">Deep performance investigation and query optimization that slashed latency from 30+ seconds to sub-second with 50% CPU reduction — no additional instances needed.</div>
+            <div class="proj-impact">↓ 30s → &lt;1s latency · 50% CPU reduction · $10K+/month savings</div>
+            <div class="proj-tech">
+              <span class="tech-badge">kSQLDB</span><span class="tech-badge">RocksDB</span><span class="tech-badge">JMX</span>
+              <span class="tech-badge">Airflow</span><span class="tech-badge">Terraform</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Jun 2019 – May 2020</div>
+        <div class="exp-company">iMPACT Lab, ASU</div>
+        <div class="exp-location">Tempe, AZ</div>
+      </div>
+      <div>
+        <div class="exp-title">Graduate Services Assistant</div>
+        <div class="exp-projects">
+          <div class="exp-project">
+            <div class="proj-name">VR UX Research with EEG Sensors</div>
+            <div class="proj-desc">Real-time brain sensor data analysis to measure immersive UX in Virtual Reality environments, reducing implementation costs by 100%.</div>
+            <div class="proj-impact">↓ 100% implementation cost reduction</div>
+            <div class="proj-tech">
+              <span class="tech-badge">Java Spring Boot</span><span class="tech-badge">Apache Kafka</span><span class="tech-badge">EEG Sensors</span>
+            </div>
+          </div>
+          <div class="exp-project">
+            <div class="proj-name">Teaching Assistant — CSE 572 Data Mining</div>
+            <div class="proj-desc">Coursera TA for 120+ students covering regression, classification, clustering, and neural networks.</div>
+            <div class="proj-impact">120+ students · live sessions &amp; office hours</div>
+            <div class="proj-tech">
+              <span class="tech-badge">Data Mining</span><span class="tech-badge">ML</span><span class="tech-badge">Coursera</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Jul 2015 – Jul 2018</div>
+        <div class="exp-company">Nokia Networks</div>
+        <div class="exp-location">Bangalore, India</div>
+      </div>
+      <div>
+        <div class="exp-title">R&amp;D Engineer</div>
+        <div class="exp-projects">
+          <div class="exp-project">
+            <div class="proj-name">Cloud Airscale WLC (cWLC)</div>
+            <div class="proj-desc">Core features including configuration, licensing, security, and performance management of Wi-Fi Access Points on Nokia's Cloud Wireless LAN Controller.</div>
+            <div class="proj-impact">↓ 50% Access Point setup time</div>
+            <div class="proj-tech">
+              <span class="tech-badge">Java</span><span class="tech-badge">Hibernate</span><span class="tech-badge">LDAP</span>
+              <span class="tech-badge">C++</span><span class="tech-badge">SOAP</span><span class="tech-badge">Selenium</span>
+            </div>
+          </div>
+          <div class="exp-project">
+            <div class="proj-name">Access Point Monitoring Dashboard</div>
+            <div class="proj-desc">Performance monitoring feature for Access Points with local-store and backend caching reducing stats retrieval latency by 30%.</div>
+            <div class="proj-impact">↓ 30% latency in performance stats retrieval</div>
+            <div class="proj-tech">
+              <span class="tech-badge">HTML/CSS</span><span class="tech-badge">Kendo UI</span><span class="tech-badge">Java JAX-RS</span>
+              <span class="tech-badge">SQLite</span><span class="tech-badge">WebSockets</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2>Projects</h2>
+  <div class="projects-grid" id="projectsGrid">
+
+    <div class="project-card">
+      <span class="proj-card-domain domain-se">Software Engineering</span>
+      <div class="proj-card-title">Platform Optimizer — Ad Budget System</div>
+      <div class="proj-card-desc">End-to-end ad campaign budget optimizer using statistical models (Min Variance, kNN) to prevent publisher overspend across Meta, Amazon, and Google Ads APIs.</div>
+      <div class="proj-card-tech">
+        <span class="tech-badge">Python</span><span class="tech-badge">Django</span><span class="tech-badge">Celery</span>
+        <span class="tech-badge">Kafka</span><span class="tech-badge">RabbitMQ</span><span class="tech-badge">PostgreSQL</span>
+      </div>
+      <div class="proj-card-impact">$1M+ annual revenue per publisher</div>
+    </div>
+
+    <div class="project-card">
+      <span class="proj-card-domain domain-de">Data Engineering</span>
+      <div class="proj-card-title">Real-Time Kafka Streaming Pipeline</div>
+      <div class="proj-card-desc">High-throughput real-time ad reporting pipeline using Kafka Streams and kSQLDB with performance tuning that dropped latency from 30s to &lt;1s.</div>
+      <div class="proj-card-tech">
+        <span class="tech-badge">Kafka Streams</span><span class="tech-badge">kSQLDB</span><span class="tech-badge">RocksDB</span>
+        <span class="tech-badge">Redshift</span><span class="tech-badge">AVRO</span>
+      </div>
+      <div class="proj-card-impact">30s → &lt;1s latency · $10K+/month saved</div>
+    </div>
+
+    <div class="project-card">
+      <span class="proj-card-domain domain-ds">Data Science</span>
+      <div class="proj-card-title">CTV Bid Optimizer with Multi-Armed Bandit</div>
+      <div class="proj-card-desc">Intelligent real-time bidding agent for Connected TV campaigns using Multi-Armed Bandit reinforcement learning to maximize revenue and prevent overspend.</div>
+      <div class="proj-card-tech">
+        <span class="tech-badge">Go</span><span class="tech-badge">Python</span><span class="tech-badge">MAB Algorithm</span>
+        <span class="tech-badge">AWS Glue</span><span class="tech-badge">Spark ETL</span>
+      </div>
+      <div class="proj-card-impact">$2.3M annually · 5% overspend reduction</div>
+    </div>
+
+    <div class="project-card">
+      <span class="proj-card-domain domain-do">DevOps</span>
+      <div class="proj-card-title">Microservice Job Scheduler</div>
+      <div class="proj-card-desc">Custom job scheduler from scratch to overcome Ads API rate limits, using internal data collection and Kafka JDBC for 100% reliability improvement.</div>
+      <div class="proj-card-tech">
+        <span class="tech-badge">Java</span><span class="tech-badge">Kafka Streams</span><span class="tech-badge">Redis</span>
+        <span class="tech-badge">Docker</span><span class="tech-badge">EKS</span><span class="tech-badge">Jenkins</span>
+      </div>
+      <div class="proj-card-impact">100% API rate-limit reliability</div>
+    </div>
+
+    <div class="project-card">
+      <span class="proj-card-domain domain-ai">AI / ML</span>
+      <div class="proj-card-title">EEG Brain Sensor VR Analysis</div>
+      <div class="proj-card-desc">Real-time streaming pipeline for EEG brain sensor data to measure and visualize user experience quality in Virtual Reality environments at ASU iMPACT Lab.</div>
+      <div class="proj-card-tech">
+        <span class="tech-badge">Apache Kafka</span><span class="tech-badge">Java Spring Boot</span>
+        <span class="tech-badge">Signal Processing</span>
+      </div>
+      <div class="proj-card-impact">100% cost reduction for VR UX research</div>
+    </div>
+
+    <!-- ADD PROJECT CARD -->
+    <div class="project-card" style="animation: 0.3s ease 0s 1 normal none running fadeIn;">
+      <span class="proj-card-domain domain-ai">AI / ML</span>
+      <div class="proj-card-title">Platform Monitoring using AI</div>
+      <div class="proj-card-desc">* Built an automated monitoring system using Google Gemini 3.5 which scans daily optimizer error notification emails and sends summarized notification over Slack. * Integrates with Github MCP server to perform a semantic search of code level errors. * Reduced developer overhead for monitoring tasks saving 10+ hours every sprint per developer.</div>
+      <div class="proj-card-tech"><span class="tech-badge">Google Apps Script</span><span class="tech-badge">Typescript</span><span class="tech-badge">Google Gemini</span><span class="tech-badge">Slack Webhook.</span></div>
+      
+    </div><div class="project-card" style="animation: 0.3s ease 0s 1 normal none running fadeIn;">
+      <span class="proj-card-domain domain-ai">AI / ML</span>
+      <div class="proj-card-title">Generic Context Router and RAG Server</div>
+      <div class="proj-card-desc">* Built a Generic LLM context router in Python using FastAPI which integrates an Applications context as sessions.
+* Build a Generic RAG server which implements Chunking, Indexing, Retrieval, Query Translation (Multi Query, Rag Fusion, Decomposition etc. ), Logical/Semantic Routing and Validation using LangChain.</div>
+      <div class="proj-card-tech"><span class="tech-badge">Python</span><span class="tech-badge">FastAPI</span><span class="tech-badge">Redis</span><span class="tech-badge">LangChain</span><span class="tech-badge">LangSmith</span></div>
+      <div class="proj-card-impact">Generic implementation helps power myriad of Agentic AI use cases.</div>
+    </div><div class="project-card" style="animation: 0.3s ease 0s 1 normal none running fadeIn;">
+      <span class="proj-card-domain domain-ai">AI / ML</span>
+      <div class="proj-card-title">Ad Campaign Manager Co-pilot</div>
+      <div class="proj-card-desc">* Created an Ad Campaign Manager Co-pilot which mimics the responsibilities of a Ad Campaign Manager. 
+* The AI Agent has capabilities like turning on/off optimization for Ad Campaigns, fetching operational and statistical information regarding Ad Campaigns, construct and send emails/ support tickets, generate reports etc.</div>
+      <div class="proj-card-tech"><span class="tech-badge">React.js</span><span class="tech-badge">TypeScript</span><span class="tech-badge">ChromaDB</span><span class="tech-badge">Redis</span><span class="tech-badge">Python</span><span class="tech-badge">FastAPI</span><span class="tech-badge">LangChain</span><span class="tech-badge">LangSmith</span><span class="tech-badge">Redshift</span><span class="tech-badge">Postgres</span><span class="tech-badge">Novu</span><span class="tech-badge">MCP</span></div>
+      <div class="proj-card-impact">Still in Prototyping Phase, expected to reduce Campaign Manager's efforts by several hours a week and provide great UX.</div>
+    </div><div class="project-card" style="animation: 0.3s ease 0s 1 normal none running fadeIn;">
+      <span class="proj-card-domain domain-do">DevOps</span>
+      <div class="proj-card-title">DEVA - The Redemption</div>
+      <div class="proj-card-desc">* DEVA is an Arcade style mobile game drawing inspiration from Vampire Survivors and integrating characters and storyline from the Mahabharatha.
+* Setup Build pipeline automation for Game artifacts (IOS and Android builds) using Github Actions, XCode, Apple Connect etc.
+* Build data pipeline using Google BigQuery and Google Firebase for real time game statistics and analytics.</div>
+      <div class="proj-card-tech"><span class="tech-badge">Github Actions</span><span class="tech-badge">XCode</span><span class="tech-badge">Apple Connect</span><span class="tech-badge">Google BigQuery</span><span class="tech-badge">Google Firebase</span></div>
+      
+    </div><div class="project-card add-project-card" onclick="openAddModal()">
+      <div class="add-icon">+</div>
+      <div class="add-label">Add new project</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-label">Recognition</div>
+  <h2>Awards &amp; Certifications</h2>
+  <div class="awards-list">
+    <div class="award-item">
+      <div class="award-icon">🥇</div>
+      <div>
+        <div class="award-title">1st Place — iHeartMedia Hackathon 2022</div>
+        <div class="award-sub">Top prize among all competing teams at internal company hackathon</div>
+      </div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🥉</div>
+      <div>
+        <div class="award-title">3rd Place — Salesforce AI Hackathon 2025</div>
+        <div class="award-sub">Competed and placed in the top 3 at Salesforce's AI-focused external hackathon</div>
+      </div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">📜</div>
+      <div>
+        <div class="award-title">MIT Applied Data Science Program — October 2023 Cohort</div>
+        <div class="award-sub">Completed MIT's professional data science certification program</div>
+      </div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🏆</div>
+      <div>
+        <div class="award-title">Certificate of Excellence — Nokia R&amp;D</div>
+        <div class="award-sub">Awarded for outstanding contributions to the Security Hardening feature</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <div class="contact-grid">
+    <div>
+      <h2>Let's build something together.</h2>
+      <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">
+        Open to senior engineering roles in ad-tech, data engineering, ML systems, and platform architecture. Based in Arizona.
+      </p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:sumanthparanja@gmail.com" class="contact-link">
+        <span class="contact-link-icon">@</span>
+        <span class="contact-link-val">sumanthparanja@gmail.com</span>
+      </a>
+      <a href="tel:+14808867735" class="contact-link">
+        <span class="contact-link-icon">☎</span>
+        <span class="contact-link-val">+1 (480) 886-7735</span>
+      </a>
+      <a href="https://linkedin.com/in/sumanthparanjape" target="_blank" class="contact-link">
+        <span class="contact-link-icon">in</span>
+        <span class="contact-link-val">linkedin.com/in/sumanthparanjape</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Sumanth Paranjape</p>
+  <p>Built with precision · Phoenix, AZ</p>
+</footer>
+
+<!-- FAB -->
+<div class="edit-fab">
+  <button class="fab-btn secondary" id="saveBtn" onclick="saveChanges()" style="display: none;">💾 Save changes</button>
+  <button class="fab-btn" id="editToggleBtn" onclick="toggleEditMode()" style="">✎ Edit mode</button>
+</div>
+
+<!-- ADD PROJECT MODAL -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <h3>Add Project</h3>
+    <div class="form-group">
+      <label>Project Title</label>
+      <input type="text" id="newTitle" placeholder="e.g. Data Lake Ingestion Pipeline">
+    </div>
+    <div class="form-group">
+      <label>Domain</label>
+      <select id="newDomain">
+        <option value="domain-se">Software Engineering</option>
+        <option value="domain-de">Data Engineering</option>
+        <option value="domain-ds">Data Science</option>
+        <option value="domain-do">DevOps</option>
+        <option value="domain-ai">AI / ML</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="newDesc" placeholder="Brief description of what you built and why..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Tech Stack (comma separated)</label>
+      <input type="text" id="newTech" placeholder="e.g. Python, Spark, Delta Lake, Airflow">
+    </div>
+    <div class="form-group">
+      <label>Impact / Result</label>
+      <input type="text" id="newImpact" placeholder="e.g. Reduced processing time by 60%">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-outline btn-sm" onclick="closeAddModal()">Cancel</button>
+      <button class="btn btn-primary btn-sm" onclick="addProject()">Add Project →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const domainLabels = {
+    'domain-se': 'Software Engineering',
+    'domain-de': 'Data Engineering',
+    'domain-ds': 'Data Science',
+    'domain-do': 'DevOps',
+    'domain-ai': 'AI / ML'
+  };
+
+  let editMode = false;
+
+  function toggleEditMode() {
+    editMode = !editMode;
+    const btn = document.getElementById('editToggleBtn');
+    const banner = document.getElementById('editBanner');
+    const editables = document.querySelectorAll('.proj-card-title, .proj-card-desc, .proj-card-impact, .exp-title, .proj-name, .proj-desc, .proj-impact, #heroSub');
+
+    if (editMode) {
+      editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+      btn.textContent = '✓ Exit edit';
+      btn.classList.remove('fab-btn');
+      btn.style.background = '#1d4ed8';
+      btn.style.color = '#fff';
+      banner.classList.add('active');
+      document.getElementById('saveBtn').style.display = 'inline-flex';
+    } else {
+      editables.forEach(el => el.removeAttribute('contenteditable'));
+      btn.textContent = '✎ Edit mode';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.classList.add('fab-btn');
+      banner.classList.remove('active');
+      document.getElementById('saveBtn').style.display = 'none';
+    }
+  }
+
+  function openAddModal() {
+    document.getElementById('addModal').classList.add('active');
+  }
+
+  function closeAddModal() {
+    document.getElementById('addModal').classList.remove('active');
+    ['newTitle','newDesc','newTech','newImpact'].forEach(id => document.getElementById(id).value = '');
+  }
+
+  function addProject() {
+    const title = document.getElementById('newTitle').value.trim();
+    const domain = document.getElementById('newDomain').value;
+    const desc = document.getElementById('newDesc').value.trim();
+    const techRaw = document.getElementById('newTech').value.trim();
+    const impact = document.getElementById('newImpact').value.trim();
+
+    if (!title) { alert('Please enter a project title.'); return; }
+
+    const techBadges = techRaw.split(',').map(t => t.trim()).filter(Boolean)
+      .map(t => `<span class="tech-badge">${t}</span>`).join('');
+
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.style.animation = 'fadeIn 0.3s ease';
+    card.innerHTML = `
+      <span class="proj-card-domain ${domain}">${domainLabels[domain]}</span>
+      <div class="proj-card-title">${title}</div>
+      <div class="proj-card-desc">${desc || 'No description provided.'}</div>
+      <div class="proj-card-tech">${techBadges}</div>
+      ${impact ? `<div class="proj-card-impact">${impact}</div>` : ''}
+    `;
+
+    const grid = document.getElementById('projectsGrid');
+    const addCard = grid.querySelector('.add-project-card');
+    grid.insertBefore(card, addCard);
+    closeAddModal();
+  }
+
+  document.getElementById('addModal').addEventListener('click', function(e) {
+    if (e.target === this) closeAddModal();
+  });
+
+  function saveChanges() {
+    // Strip all contenteditable attributes before saving
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    // Remove the edit banner active state
+    const banner = clone.querySelector('#editBanner');
+    if (banner) banner.classList.remove('active');
+    // Reset edit button appearance
+    const saveBtn = clone.querySelector('#saveBtn');
+    if (saveBtn) saveBtn.style.display = 'none';
+    const editBtn = clone.querySelector('#editToggleBtn');
+    if (editBtn) { editBtn.textContent = '✎ Edit mode'; editBtn.style.background = ''; editBtn.style.color = ''; editBtn.classList.add('fab-btn'); }
+
+    const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'sumanth_portfolio.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+
+
+</body></html>
